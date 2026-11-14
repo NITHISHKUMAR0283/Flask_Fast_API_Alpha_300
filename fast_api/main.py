@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
+from random import randint
 
 app = FastAPI()
 
@@ -27,6 +28,16 @@ def getpost():
 
 @app.post("/postuser")
 def post(payload:Post):
-    print(payload)
-    print(payload.dict())
-    return f'{payload.title} and {payload.content}'
+    post_dict = payload.model_dump()
+    post_dict['id'] = randint(0,100000000)
+    my_posts.append(post_dict)
+    return my_posts
+
+@app.get("/posts/latest")
+def get_latest_post():
+    post = my_posts[len(my_posts)-1]
+    return {"detail": post}
+
+@app.get("/postuser/{id}")
+def getpost(id:int):
+    return f'got the {id}'
