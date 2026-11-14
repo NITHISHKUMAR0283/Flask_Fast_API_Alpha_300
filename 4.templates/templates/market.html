@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block title%}
+market page
+{%endblock%}
+
+{%block content%}
+<table>
+    <thead>
+        <tr>
+            <th scope = "col">SI.NO</th>
+            <th scope = "col">Name</th>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        
+    {%for item in items%}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+        </tr>
+    {%endfor%}
+    </tbody>
+</table>
+{%endblock%}
